@@ -858,7 +858,7 @@ print("✅ Saved full results to full_qap_results.csv")
 
 
 # Regressions
-
+## Mainland
 ```Python
 import delimited "/Users/gurumakaza/Documents/data/Correlation mainland.csv", clear
 encode city, gen(city_id)
@@ -878,3 +878,4 @@ shellout using `"qap_panel_fe.doc"'
 seeout using "qap_panel_fe.txt"
 shellout using `"qap_panel_fe.doc"'
 ```
+## HMT
