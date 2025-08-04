@@ -671,7 +671,7 @@ from glob import glob
 hmt_codes = ['hkg', 'mac', 'twn']
 
 # Base cleaned CSV directory
-data_folder = '/Users/gurumakaza/Documents/data/IO table/cleaned_csv'
+data_folder = '/Users/gurumakaza/Documents/data/IO table/cleaned_csv/HMT'
 
 # Find only HMT files
 csv_files = sorted([
@@ -741,8 +741,30 @@ for file_path in tqdm(csv_files, desc="Processing files", unit="file"):
 
             link_dict = extract_link_matrices(mat)
             row = {'year': year, 'city': province.upper(), 'type': 'HMT'}
+            
+            
+            used_pairs = set()
             for link_name, submat in link_dict.items():
-                row[link_name] = qap_correlation(submat, submat.T) if submat is not None else np.nan
+                if submat is None:
+                    row[link_name] = np.nan
+                    continue
+
+                src, tgt = link_name.split("_")
+                reverse_name = f"{tgt}_{src}"
+
+                if (tgt, src) in used_pairs:
+                    continue
+
+                reverse_mat = link_dict.get(reverse_name)
+                if reverse_mat is not None:
+                    row[link_name] = qap_correlation(submat, reverse_mat.T)
+                else:
+                    row[link_name] = np.nan
+
+                used_pairs.add((src, tgt))
+
+            
+            
             all_qap_df.append(pd.DataFrame([row]))
         except Exception as e:
             print(f"❌ Failed to process HMT file {basename}: {e}")
@@ -813,7 +835,7 @@ final_qap_df[qap_cols] = (
 )
 
 # Save results
-final_qap_df.to_csv("/Users/gurumakaza/Documents/data/full_qap_results HMT.csv", index=False)
+final_qap_df.to_csv("/Users/gurumakaza/Documents/data/Correlation HMT.csv", index=False)
 print("✅ Saved full results to full_qap_results.csv")
 
 
