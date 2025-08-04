@@ -403,12 +403,29 @@ for file_path in tqdm(csv_files, desc="Processing files", unit="file"):
         for inv_type in all_links[city]:
             link_dict = all_links[city][inv_type]
             row = {'year': year, 'city': f"{province}_{city}", 'type': inv_type}
+            used_pairs = set()
+
             for link_name, mat in link_dict.items():
-                if mat is not None:
-                    corr = qap_correlation(mat, mat.T)
+                if mat is None:
+                    row[link_name] = np.nan
+                    continue
+
+                src, tgt = link_name.split("_")
+                reverse_name = f"{tgt}_{src}"
+
+                # Avoid duplicate calculation
+                if (tgt, src) in used_pairs:
+                    continue
+
+                mat_rev = link_dict.get(reverse_name)
+                if mat_rev is not None:
+                    corr = qap_correlation(mat, mat_rev.T)  # ✅ Transpose the reverse
                 else:
                     corr = np.nan
+
                 row[link_name] = corr
+                used_pairs.add((src, tgt))
+
             records.append(row)
 
     qap_df = pd.DataFrame(records)
@@ -479,9 +496,13 @@ df[qap_cols] = (
 )
 
 # Step 5: Save cleaned version
-cleaned_path = "/Users/gurumakaza/Documents/data/full_qap_results_interpolated.csv"
+cleaned_path = "/Users/gurumakaza/Documents/data/Correlation mainland.csv"
 df.to_csv(cleaned_path, index=False)
 print(f"✅ Cleaned and saved to {cleaned_path}")
+
+
+
+
 
 
 
