@@ -866,7 +866,7 @@ encode type, gen(type_id)
 keep if type == "内资"
 duplicates drop city_id year, force
 xtset city_id year
-local depvars esp_qol qol_lod rds_lod qol_rds ef_rds rds_wi ef_es wi_es es_esp
+local depvars esp_qol qol_lod rds_lod rds_qol ef_rds wi_rds ef_es wi_es esp_es
 
 cap erase qap_panel_fe.doc
 cap erase qap_panel_fe.txt
