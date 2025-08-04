@@ -860,7 +860,7 @@ print("✅ Saved full results to full_qap_results.csv")
 # Regressions
 
 ```Python
-import delimited "/Users/gurumakaza/Documents/data/full_qap_results_interpolated.csv", clear
+import delimited "/Users/gurumakaza/Documents/data/Correlation mainland.csv", clear
 encode city, gen(city_id)
 encode type, gen(type_id)
 keep if type == "内资"
