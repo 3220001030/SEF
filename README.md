@@ -1399,8 +1399,8 @@ gen lnY=log(realGDP)
 gen lnK = log(K)
 gen lnL = log(从业人员年平均人数万人)
 
-ppmlhdfe realGDP lnK lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, absorb (年份 城市) 
-ppmlhdfe realGDP lnK lnL 外资WI_ES c.外资WI_ES#c.lnK c.外资WI_ES#c.lnL if coastal == 1, absorb (年份 城市) 
-ppmlhdfe realGDP lnK lnL 港澳台WI_ES c.港澳台WI_ES#c.lnK c.港澳台WI_ES#c.lnL if coastal == 1, absorb (年份 城市) 
+ppmlhdfe realGDP lnK lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, absorb (年份 省份 城市) 
+ppmlhdfe realGDP lnK lnL 外资WI_ES c.外资WI_ES#c.lnK c.外资WI_ES#c.lnL if coastal == 1, absorb (年份 省份 城市) 
+ppmlhdfe realGDP lnK lnL 港澳台WI_ES c.港澳台WI_ES#c.lnK c.港澳台WI_ES#c.lnL if coastal == 1, absorb (年份 省份 城市) 
 ```
 ## HMT
