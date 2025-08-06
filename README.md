@@ -1394,6 +1394,7 @@ print(f"✅ Cleaned and saved to {cleaned_path}")
 # Regressions
 ## Base
 ### Mainland
+Coastal
 ```Python
 erase SEF_base_coastal.txt  
 erase SEF_base_coastal.doc
@@ -1409,6 +1410,25 @@ outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec
 
 ppmlhdfe realGDP lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, absorb (年份 城市)
 outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+
+```
+Inland
+```Python
+erase SEF_base_inland.txt  
+erase SEF_base_inland.doc
+
+ppmlhdfe realGDP lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL if coastal == 0, absorb (年份 城市)
+outreg2 using SEF_base_inland.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(1) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+ppmlhdfe realGDP lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL if coastal == 0, absorb (年份 城市)
+outreg2 using SEF_base_inland.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(2) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+ppmlhdfe realGDP lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL c.内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL if coastal == 0, absorb (年份 城市)
+outreg2 using SEF_base_inland.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(3) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+ppmlhdfe realGDP lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 0, absorb (年份 城市)
+outreg2 using SEF_base_inland.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
 
 
 ```
