@@ -1394,22 +1394,13 @@ print(f"✅ Cleaned and saved to {cleaned_path}")
 # Regressions
 ## Mainland
 ```Python
-import delimited "/Users/gurumakaza/Documents/data/Correlation mainland.csv", clear
-encode city, gen(city_id)
-encode type, gen(type_id)
-keep if type == "内资"
-duplicates drop city_id year, force
-xtset city_id year
-local depvars esp_qol qol_lod rds_lod rds_qol ef_rds wi_rds ef_es wi_es esp_es
+import excel "/Users/gurumakaza/Library/CloudStorage/OneDrive-MacauUniversityofScienceandTechnology/D盘/【课程】M/【M】毕业论文/data/Panel mainland_chained_realGDP.xlsx", sheet("Sheet1") firstrow clear
+gen lnY=log(realGDP)
+gen lnK = log(K)
+gen lnL = log(从业人员年平均人数万人)
 
-cap erase qap_panel_fe.doc
-cap erase qap_panel_fe.txt
-foreach v of local depvars {
-    xtreg `v' i.year, fe vce(robust)
-    outreg2 using qap_panel_fe.doc, append ctitle(`v') alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) addstat(R-squared, `e(r2)', N, e(N))
-}
-shellout using `"qap_panel_fe.doc"'
-seeout using "qap_panel_fe.txt"
-shellout using `"qap_panel_fe.doc"'
+ppmlhdfe realGDP lnK lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, absorb (年份 城市) 
+ppmlhdfe realGDP lnK lnL 外资WI_ES c.外资WI_ES#c.lnK c.外资WI_ES#c.lnL if coastal == 1, absorb (年份 城市) 
+ppmlhdfe realGDP lnK lnL 港澳台WI_ES c.港澳台WI_ES#c.lnK c.港澳台WI_ES#c.lnL if coastal == 1, absorb (年份 城市) 
 ```
 ## HMT
