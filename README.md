@@ -1408,6 +1408,9 @@ gen lnL3 = log(第三产业从业人员数万人)
 gen Y1 = 第一产业增加值占GDP比重*realGDP
 gen Y2 = 第二产业增加值占GDP比重*realGDP
 gen Y3 = 第三产业增加值占GDP比重*realGDP
+gen lnY1 = log(Y1)
+gen lnY2 = log(Y2)
+gen lnY3 = log(Y3)
 ```
 ### Baseline linear
 
