@@ -1412,6 +1412,18 @@ gen lnY1 = log(Y1)
 gen lnY2 = log(Y2)
 gen lnY3 = log(Y3)
 ```
+### Hausman test
+```Python
+xtset 城市代 年份
+xtreg lnY lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, fe
+estimates store FE
+
+xtreg lnY lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, re
+estimates store RE
+
+suest FE RE
+hausman FE RE
+```
 ### Baseline linear
 
 ```Stata
