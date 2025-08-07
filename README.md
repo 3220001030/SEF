@@ -1413,7 +1413,7 @@ gen lnY2 = log(Y2)
 gen lnY3 = log(Y3)
 ```
 ### Hausman test
-```Python
+```Stata
 xtset 城市代 年份
 xtreg lnY lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, fe
 estimates store FE
@@ -1447,7 +1447,7 @@ outreg2 using SEF_base_coastal_linear.doc, append alpha(0.001, 0.01, 0.05) bdec(
 
 ```
 Sector
-```Python
+```Stata
 erase SEF_sector.txt  
 erase SEF_sector.doc
 
@@ -1483,7 +1483,7 @@ outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec
 
 ```
 Sector
-```Python
+```Stata
 erase SEF_sector.txt  
 erase SEF_sector.doc
 
