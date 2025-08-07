@@ -1406,17 +1406,16 @@ gen lnL = log(从业人员年平均人数万人)
 erase SEF_base_coastal_linear.txt  
 erase SEF_base_coastal_linear.doc
 
-reghdfe lnY lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL if coastal == 1, absorb (年份 城市)
+reghdfe lnY lnK lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL if coastal == 1, absorb (年份 城市) vce(r)
+outreg2 using SEF_base_coastal_linear.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(R-squared, `e(r2)') addtext(Province City Year FE, YES) 
+
+reghdfe lnY lnK lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL if coastal == 1, absorb (年份 城市) vce(r)
 outreg2 using SEF_base_coastal_linear.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(R-squared, `e(r2)') addtext(Province City Year FE, YES)
 
-reghdfe lnY lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL if coastal == 1, absorb (年份 城市)
+reghdfe lnY lnK lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, absorb (年份 城市) vce(r)
 outreg2 using SEF_base_coastal_linear.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(R-squared, `e(r2)') addtext(Province City Year FE, YES)
 
-reghdfe lnY lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL if coastal == 1, absorb (年份 城市)
-outreg2 using SEF_base_coastal_linear.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(R-squared, `e(r2)') addtext(Province City Year FE, YES)
 
-reghdfe lnY lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, absorb (年份 城市)
-outreg2 using SEF_base_coastal_linear.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(R-squared, `e(r2)') addtext(Province City Year FE, YES)
 
 
 ```
