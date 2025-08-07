@@ -1399,6 +1399,15 @@ import excel "/Users/gurumakaza/Library/CloudStorage/OneDrive-MacauUniversityofS
 gen lnY = log(realGDP)
 gen lnK = log(K)
 gen lnL = log(从业人员年平均人数万人)
+gen lnK1 = log(K*第一产业增加值占GDP比重)
+gen lnK2 = log(K*第二产业增加值占GDP比重)
+gen lnK3 = log(K*第三产业增加值占GDP比重)
+gen lnL1 = log(第一产业从业人员数万人)
+gen lnL2 = log(第二产业从业人员数万人)
+gen lnL3 = log(第三产业从业人员数万人)
+gen Y1 = 第一产业增加值占GDP比重*realGDP
+gen Y2 = 第二产业增加值占GDP比重*realGDP
+gen Y3 = 第三产业增加值占GDP比重*realGDP
 ```
 ### Baseline linear
 
@@ -1437,6 +1446,22 @@ outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec
 
 ppmlhdfe realGDP lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, absorb (年份 城市)
 outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+```
+### Sector
+```Python
+erase SEF_sector.txt  
+erase SEF_sector.doc
+
+ppmlhdfe Y1 lnK1 lnL1 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, absorb (年份 城市)
+outreg2 using SEF_sector.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(1) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+ppmlhdfe Y2 lnK2 lnL2 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, absorb (年份 城市)
+outreg2 using SEF_sector.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(1) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+ppmlhdfe Y3 lnK3 lnL3 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL  if coastal == 1, absorb (年份 城市)
+outreg2 using SEF_sector.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(1) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
 
 ```
 
