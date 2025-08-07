@@ -1392,10 +1392,17 @@ print(f"✅ Cleaned and saved to {cleaned_path}")
 ```
 
 # Regressions
-## Base
+## Ordinary
+### Data preparation
+```Stata
+import excel "/Users/gurumakaza/Library/CloudStorage/OneDrive-MacauUniversityofScienceandTechnology/D盘/【课程】M/【M】毕业论文/data/Panel mainland_chained_realGDP.xlsx", sheet("Sheet1") firstrow
+gen lnY = log(realGDP)
+gen lnK = log(K)
+gen lnL = log(从业人员年平均人数万人)
+```
 ### Mainland
 Coastal
-```Python
+```Stata
 erase SEF_base_coastal.txt  
 erase SEF_base_coastal.doc
 
@@ -1414,7 +1421,7 @@ outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec
 
 ```
 Inland
-```Python
+```Stata
 erase SEF_base_inland.txt  
 erase SEF_base_inland.doc
 
