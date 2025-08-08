@@ -1394,7 +1394,7 @@ print(f"✅ Cleaned and saved to {cleaned_path}")
 # Regressions
 ## Ordinary
 ### Data preparation
-```Stata
+```Python
 import excel "/Users/gurumakaza/Library/CloudStorage/OneDrive-MacauUniversityofScienceandTechnology/D盘/【课程】M/【M】毕业论文/data/Panel mainland_chained_realGDP.xlsx", sheet("Sheet1") firstrow
 gen lnY = log(realGDP)
 gen lnK = log(K)
@@ -1413,7 +1413,7 @@ gen lnY2 = log(Y2)
 gen lnY3 = log(Y3)
 ```
 ### Hausman test
-```Stata
+```Python
 xtset 城市代 年份
 xtreg lnY lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1, fe
 estimates store FE
@@ -1426,7 +1426,7 @@ hausman FE RE
 ```
 
 ### General effect
-```Stata
+```Python
 erase SEF_base_coastal.txt  
 erase SEF_base_coastal.doc
 
@@ -1444,7 +1444,7 @@ outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec
 
 ```
 Sector
-```Stata
+```Python
 erase SEF_sector.txt  
 erase SEF_sector.doc
 
