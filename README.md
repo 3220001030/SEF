@@ -1478,3 +1478,18 @@ ppmlhdfe realGDP lnK lnL 港澳台ESP_QoL c.港澳台ESP_QoL#c.lnK c.港澳台ES
 outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
 
 ```
+Stage
+```Python
+erase SEF_base_coastal.txt  
+erase SEF_base_coastal.doc
+
+ppmlhdfe realGDP lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1 & 年份<2008, absorb (年份 城市)
+outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(2002-2006) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+ppmlhdfe realGDP lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1 & 年份<2021 & 年份>2007, absorb (年份 城市)
+outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(2007-2020) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+ppmlhdfe realGDP lnK lnL 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL if coastal == 1 & 年份>2020, absorb (年份 城市)
+outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(2021-2022) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+```
