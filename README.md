@@ -1508,6 +1508,16 @@ outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec
 ppmlhdfe realGDP lnK lnL 自然增长率 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL 内资RDS_QoL c.内资RDS_QoL#c.lnK c.内资RDS_QoL#c.lnL c.内资RDS_QoL#c.内资ESP_QoL if coastal == 1, absorb (年份 城市)
 outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
 ```
+```Python
+erase SEF_base_coastal.txt  
+erase SEF_base_coastal.doc
+
+ppmlhdfe realGDP lnK lnL 自然增长率 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL 内资RDS_QoL c.内资RDS_QoL#c.lnK c.内资RDS_QoL#c.lnL 内资QoL_LoD if coastal == 1, absorb (年份 城市)
+outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+
+ppmlhdfe realGDP lnK lnL 自然增长率 内资ESP_QoL c.内资ESP_QoL#c.lnK c.内资ESP_QoL#c.lnL 内资WI_RDS c.内资WI_RDS#c.lnK c.内资WI_RDS#c.lnL 内资ESP_ES c.内资ESP_ES#c.lnK c.内资ESP_ES#c.lnL 内资WI_ES c.内资WI_ES#c.lnK c.内资WI_ES#c.lnL 内资RDS_QoL c.内资RDS_QoL#c.lnK c.内资RDS_QoL#c.lnL 内资QoL_LoD c.内资RDS_QoL#c.内资QoL_LoD if coastal == 1, absorb (年份 城市)
+outreg2 using SEF_base_coastal.doc, append alpha(0.001, 0.01, 0.05) bdec(3) tdec(3) ctitle(4) addstat(Pseudo R-squared, `e(r2_p)') addtext(Province City Year FE, YES)
+```
 3rd order
 ```Python
 erase SEF_base_coastal.txt  
